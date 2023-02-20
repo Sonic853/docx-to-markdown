@@ -7,7 +7,9 @@ module.exports = async filenames => {
 
     spinner.start(`Converting docx files to markdown`);
     try {
-        await execa(`mkdir`, [`markdown`]);
+        if (!fs.existsSync('markdown')) {
+            await execa(`mkdir`, [`markdown`]);
+        }
         filenames.map(async file => {
             try {
                 await execa(`pandoc`, [
@@ -21,12 +23,12 @@ module.exports = async filenames => {
                     `-o`,
                     `markdown/${file}/${file}.md`,
                 ]);
-            } catch (error) {}
+            } catch (error) { }
         });
         spinner.succeed(
             `${chalk.hex(`#6cc644`).inverse(` DONE `)} ${filenames.length} file/s converted`
         );
     } catch (error) {
-        spinner.fail(`${chalk.hex(`#FF0000`).inverse(` ERROR `)} Couldn't convert the file/s.`);
+        spinner.fail(`${chalk.hex(`#FF0000`).inverse(` ERROR `)} Couldn't convert the file/s: ${error.message}`);
     }
 };
