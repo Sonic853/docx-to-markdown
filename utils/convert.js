@@ -1,6 +1,7 @@
 const execa = require('execa');
 const ora = require('ora');
 const chalk = require('chalk');
+const fs = require('fs');
 
 module.exports = async filenames => {
     let spinner = ora();
