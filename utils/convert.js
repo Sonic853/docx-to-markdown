@@ -15,9 +15,11 @@ module.exports = async filenames => {
                     `docx`,
                     `-t`,
                     `markdown`,
+                    `--extract-media`,
+                    `./markdown/${file}`,
                     `${file}.docx`,
                     `-o`,
-                    `markdown/${file}.md`,
+                    `markdown/${file}/${file}.md`,
                 ]);
             } catch (error) {}
         });
