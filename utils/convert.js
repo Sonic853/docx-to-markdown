@@ -17,7 +17,7 @@ module.exports = async filenames => {
                     `-f`,
                     `docx`,
                     `-t`,
-                    `markdown`,
+                    `markdown-raw_html-link_attributes`,
                     `--extract-media`,
                     `./markdown/${file}`,
                     `${file}.docx`,
